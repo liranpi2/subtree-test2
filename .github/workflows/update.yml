@@ -21,12 +21,10 @@ jobs:
       - run: |
           git config user.name ${{ github.actor }}
           git config remote.remote.url >&- || git remote add limiter -f  https://github.com/liranpi2/limiter.git
-          git merge -s ours --no-commit --allow-unrelated-histories limiter/master
           git pull -s subtree -Xsubtree=https://github.com/liranpi2/limiter.git limiter master
+          git merge -s ours --no-commit --allow-unrelated-histories limiter/master
           git commit -m "merge subtree"
-        continue-on-error: true 
         
       - name: push changes
         run: | 
           git push
-        continue-on-error: true 
